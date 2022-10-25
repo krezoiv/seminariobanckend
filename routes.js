@@ -14,13 +14,15 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/one', (req, res) => {
-    const {id} = req.body;
-    let sql = `SELECT * FROM integrantes WHERE id='${id}'`
-    connection.connection.query(sql, [id],(err, row, fields) => {
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
+    let sql = 'SELECT * FROM integrantes WHERE id= ?'
+    connection.connection.query(sql, [id],(err, rows, fields) => {
         if(err) throw err;
         else{
-            res.json(row)
+            res.json
+                (rows[0])
+            
         }
     })
 })
